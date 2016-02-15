@@ -1,5 +1,9 @@
 package binaryTree
 
+import (
+	"fmt"
+)
+
 // Node is a node of the tree
 type Node struct {
 	Val    int
@@ -33,4 +37,27 @@ func (n *Node) deleteNode() {
 	} else {
 		n.Parent.Right = nil
 	}
+}
+
+func (n *Node) branchLength() int {
+	total := 1
+	if n.Left != nil {
+		total += n.Left.branchLength()
+	}
+	if n.Right != nil {
+		total += n.Right.branchLength()
+	}
+	return total
+}
+
+func (n *Node) print() string {
+	str := fmt.Sprintf("%d\n", n.Val)
+	if n.Left != nil && n.Right != nil {
+		str = fmt.Sprintf("%s %s %s", str, n.Left.print(), n.Right.print())
+	} else if n.Left != nil {
+		str = fmt.Sprintf("%s %s", str, n.Left.print())
+	} else if n.Right != nil {
+		str = fmt.Sprintf("%s %s", str, n.Right.print())
+	}
+	return str
 }
