@@ -53,11 +53,11 @@ func (n *Node) branchLength() int {
 func (n *Node) print() string {
 	str := fmt.Sprintf("%d\n", n.Val)
 	if n.Left != nil && n.Right != nil {
-		str = fmt.Sprintf("%s %s %s", str, n.Left.print(), n.Right.print())
+		str = fmt.Sprintf("%s L %s / R %s /", str, n.Left.print(), n.Right.print())
 	} else if n.Left != nil {
-		str = fmt.Sprintf("%s %s", str, n.Left.print())
+		str = fmt.Sprintf("%s L %s", str, n.Left.print())
 	} else if n.Right != nil {
-		str = fmt.Sprintf("%s %s", str, n.Right.print())
+		str = fmt.Sprintf("%s R %s", str, n.Right.print())
 	}
 	return str
 }

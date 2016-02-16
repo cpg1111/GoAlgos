@@ -28,12 +28,23 @@ func New(vals []int) *Tree {
 }
 
 // Add adds a Node with a value
-func (t *Tree) Add(val int) {
+func (t *Tree) Add(val int) int {
 	if val < t.current.Val {
-		t.current.Left = newNode(val, t.current)
-	} else {
-		t.current.Right = newNode(val, t.current)
+		if t.current.Left == nil {
+			t.current.Left = newNode(val, t.current)
+			t.current = t.Root
+			return 1
+		}
+		t.current = t.current.Left
+		return t.Add(val)
 	}
+	if t.current.Right == nil {
+		t.current.Right = newNode(val, t.current)
+		t.current = t.Root
+		return 1
+	}
+	t.current = t.current.Right
+	return t.Add(val)
 }
 
 // Search finds a value in the tree
